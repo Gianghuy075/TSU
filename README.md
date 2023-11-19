@@ -1,123 +1,37 @@
-Vision and Scope Document
-For
-Management of student uniforms Version 1.0 
-Prepared by Giang Huy
-Process Impact
+Git Commit
+git commit creates a commit, which is like a snapshot of your repository. These commits are snapshots of your entire repository at specific times. You should make new commits often, based around logical units of change. Over time, commits should tell a story of the history of your repository and how it came to be the way that it currently is. Commits include lots of metadata in addition to the contents and message, like the author, timestamp, and more.
 
+How Git Commit Works
+Commits are the building blocks of "save points" within Git's version control.
 
+git commit -m "update the README.md with link to contributing guide"
 
+Commits shape history
+By using commits, you're able to craft history intentionally and safely. You can make commits to different branches, and specify exactly what changes you want to include. Commits are created on the branch that you're currently checked out to (wherever HEAD is pointing) so it's always a good idea to run git status before making a commit, to check that you're checked-out to the branch that you intend to be. Before you commit, you will need to stage any new changes that you'd like to include in the commit using git add [file].
 
-September 19, 2023
- 
-Table of Contents
+Commits are lightweight SHA hashes, objects within Git. As long as you're working with text files, you won't need to worry about how many files you have, how big they are, or how many commits you make. Git can handle it!
 
-Table of Contents	ii
-Revision History	ii
-1.	Business Requirements	1
-1.1.	Background	1
-1.2.	Business Opportunity	1
-1.3.	Business Objectives	1
-1.4.	Success Metrics	1
-1.5.	Vision Statement	1
-1.6.	Business Risks	2
-1.7.	Business Assumptions and Dependencies	2
-2.	Scope and Limitations	2
-2.1.	Major Features	2
-2.2.	Scope of Initial and Subsequent Releases	3
-2.3.	Limitations and Exclusions	3
-3.	Business Context	4
-3.1.	Stakeholder Profiles	4
-3.2.	Project Priorities	5
-3.3.	Deployment Considerations	5
+Committing in two phases
+Commits have two phases to help you craft commits properly. Commits should be logical, atomic units of change that represent a specific idea. But, not all humans work that way. You may get carried away and end up solving two or three problems before you remember to commit! That's OK - Git can handle that. Once you're ready to craft your commits, you'll use git add <FILENAME> to specify the files that you'd like to "stage" for commit. Without adding any files, the command git commit won't work. Git only looks to the staging area to find out what to commit. Staging, or adding, files, is possible through the command line, and also possible with most Git interfaces like GitHub Desktop by selecting the lines or files that you'd like to stage.
 
+You can also use a handy command, git add -p, to walk through the changes and separate them out, even if they're in the same file.
 
+How to Use Git Commit
+Common usages and options for Git Commit
+git commit: This starts the commit process, but since it doesn't include a -m flag for the message, your default text editor will be opened for you to create the commit message. If you haven't configured anything, there's a good chance this will be VI or Vim. (To get out, press esc, then :w, and then Enter. :wink:)
+git commit -m "descriptive commit message": This starts the commit process, and allows you to include the commit message at the same time.
+git commit -am "descriptive commit message": In addition to including the commit message, this option allows you to skip the staging phase. The addition of -a will automatically stage any files that are already being tracked by Git (changes to files that you've committed before).
+git commit --amend: Replaces the most recent commit with a new commit. (More on this later!)
+To see all of the possible options you have with git commit, check out Git's documentation.
 
+How to Undo Commits in Git
+Sometimes, you may need to change history. You may need to undo a commit. If you find yourself in this situation, there are a few very important things to remember:
 
-Revision History
+If you are "undoing" a commit that exists on the remote, you could create big problems for your collaborators
+Undoing a commit on work that you only have locally is much safer
+What can go wrong while changing history?
+Changing history for collaborators can be problematic in a few ways. Imagine - You and another collaborator have the same repository, with the same history. But, they make a change that deletes the most recent commit. They continue new commits from the commit directly before that. Meanwhile, you keep working with the commit that the collaborator tried to delete. When they push, they'll have to 'force push', which should show to them that they're changing history. What do you think will happen when you try to push?
 
+In dramatic cases, Git may decide that the histories are too different and the projects are no longer related. This is uncommon, but a big problem.
 
-Name	Date	Reason For Changes	Version
-Giang Tuấn Huy	17/9/2023	initial draft	1.0 draft 1
-			
- 
-1.	Business Requirements
-1.1.	Background
-In the last 10 years, employees of company A have been spending a lot of time collecting and processing data for the company. It will take staff about 1-2 days to collect student data (Student height and weight) from a school (depending on the number of staff). Once all the information (Student height and weight) of all students is available, the staff needs to enter that information into the computer at the company. That will take an extra day of work for that employee. That keeps happening to the company when it has to work with over 90 customers (schools).
-1.2.	Business Opportunity
-Management requested a system that could allow employees to enter data (Student height and weight) into the system. From there, it is possible to shorten employee data collection time from 3 days to 1 day. In addition, Managers can monitor employee activities to find possible errors (wrong data, etc.). This system can both manage and send work information to employees more easily. And Staff can collect and process data faster.
-1.3.	Business Objectives
-BO-1: 40% reduction in time in terms of data collection.
-Scale: 45 minutes to 1 hour for 1 class(with 1 Staff).
-Past: more than 20 hours per School.
-Goal: Less than 60% time.
-Stretch: Less than 10%
-
-BO-2: Shorten the entire data entry and data checking time.
-1.4.	Success Metrics
-SM-1: Data Collection Time Reduction: Measure the time it takes to collect student height and 
-weight data before and after implementing the system.
-
-SM-2: Assess the accuracy of the data collected. Track the number of errors or discrepancies in 
-the data before and after the system's implementation. The success metric could be significant. 
-reduction in data errors.
-
-SM-2: Employee Productivity: Measure how much faster employees can collect and process data with the new system. You can track the number of data entries completed per hour or per employee before and after the system's implementation.
-
-SM-3: System Usability: Collect feedback from employees and managers on the usability of the 
-system. Use surveys or user satisfaction scores to assess how easy and efficient it is to use the 
-system.
-1.5.	Vision Statement
-Compared to the past, the new data management system represents a significant improvement in several key ways. In the past, data collection from schools was a time-consuming process, often taking 1-2 days per school, depending on the number of staff involved. Once collected, data entry at the company added another day of work for employees. This manual process could be extremely time-intensive and error-prone, especially when dealing with over 90 schools.
-
-In contrast, the new system streamlines this process by allowing employees to directly input data online into the system, reducing data collection and entry time from 3 days to just 1 day. Managers can monitor data entry in real-time, ensuring data accuracy and addressing errors promptly. The system also organizes and stores data efficiently, improving workflow and communication within the company. As the company grows, the system can easily scale to handle increased workload. Overall, it represents a more efficient, accurate, and adaptable solution compared to the labor-intensive processes of the past.
-1.6	.   Business Risks
-RI-1:	There may be risks related to data security and privacy. Storing and managing student data involves sensitive information. If the system is not adequately secured, there is a risk of data breaches or unauthorized access, potentially leading to legal and reputational issues. . (Probability = 0.6; Impact = 0.9)
-RI-2:	The implementation of a new data management system may encounter technological challenges. This could include issues with system integration, software bugs, or hardware failures, which might lead to downtime or disruptions in data processing. (Probability = 0.4; Impact = 0.9)
-RI-3:	Employees who are accustomed to the old manual processes may resist the adoption of the new system. Change management challenges, such as training and adjusting to new workflows, could affect the project's success. (Probability = 0.6; Impact = 0.7)
-RI-4:	As the project aims to work with over 90 schools, there may be concerns about the system's scalability. If the system cannot handle the increasing volume of data and customers, it could lead to performance issues and hinder the company's growth. (Probability = 0.6; Impact = 0.9).
-1.7.	 Business Assumptions and Dependencies
-AS-1:	The successful integration of the new data management system with existing company systems and databases is critical.
-AS-2:	To minimize resistance to change and ensure efficient system usage, it is assumed that employees will be well-prepared to operate the system. Inadequate training could lead to errors and reduced productivity.
-DE-1:	. The new system must seamlessly interact with other internal systems to ensure efficient data flow and operations. Delays or complications in integration could hinder the project's progress and functionality.
-2.	Scope and Limitations
-2.1.	Major Features
-FE-1:	Log in with the account provided by Admin. User can change password with email.
-FE-2: Admin has the right to view the activity history of employees, add and delete employee accounts.
-FE-3:	Managers have the right to add, edit information, and delete company products.
-FE-4:	Managers can add customer data. Give employees permission to collect more customer information (Student height and weight). Managers can export detailed orders with each customer's due number.
-FE-5:	People with Admin and Manager role can issue notifications to employees.
-FE-6: Users can edit and save data when granted permission by the Manager.
-FE-7:	Provide system access through corporate intranet, smartphone, tablet, and outside Internet access by authorized employees.
-
-  
-Figure 1. Partial feature tree for the Management of student uniforms System.
-2.2.	Scope of Initial and Subsequent Releases
-Feature	Release 1	Release 2	Release 3
-FE-1, Log in 	Users can log in using accounts created by admin	Users can change password by email.	Fully implemented
-FE-2, Admin Management	Add or remove employee accounts.	view the activity history of employees	Fully implemented
-FE-3, Managers	add, edit information, and delete company products	Add image product and detail.	Fully implemented
-FE-4, Managers add customer data.	Modify, delete, and archive Data	export detailed orders with each customer's due number
-FE-5, Admin and Manager	issue notifications to employees	Fully implemented	Fully implemented
-FE-6, User	edit and save data when granted permission by the Manager		
-FE-7, System access	Intranet and outside Internet access	iOS and Android phone and tablet apps	Windows Phone and tablet apps
-2.3.	Limitations and Exclusions
-LI-1: Managers will have to set a certain time for employees to complete the data.
-LI-2: Limit access to the company's customer data, so only managers know the details.
-LI-3: Restrict the right to edit customer information.
-3.	Business Context
-3.1.	Stakeholder Profiles
-Stakeholder	Major Value	Attitudes	Major Interests	Constraints
-Manager	Improved employee productivity; cost savings for company	Strong commitment through release 2; support for release 3 contingent on earlier results	Cost and employee time savings must exceed development and usage costs	None identified
-Employee	More efficient use of staff time throughout the day; higher customer satisfaction	Concern about union relationships and possible downsizing; otherwise, receptive	Job preservation	Training for staff in Internet usage and Excel needed; delivery staff and vehicles needed
-Payroll Department
-	No benefit; needs to set up the system.	Dissatisfied with the employee's time-consuming work, but recognizes the value to the company and employees	Create a system to reduce the time it takes to collect data information	None identified.
-
-3.2.	Project Priorities
-Dimension	Constraint	Driver	Degree of Freedom
-Features	All features scheduled for release 1.0 must be fully operational		
-Quality	80% of user acceptance tests must pass; all security tests must pass		
-Schedule			Release 1 planned to be available by end of Q1 of next year, release 2 by end of Q2; overrun of up to 2 weeks acceptable without sponsor review
-Staff		Team size is half-time project manager, half-time BA, 3 developers, and 1 tester: additional developer and half-time tester available if necessary	
-3.3.	Deployment Considerations
-The web server software will need to be upgraded to the latest version. Apps will have to be developed for iOS and Android smartphones and tablets as part of the second release, with corresponding apps for Windows, Phone and tablets to follow for the third release. Any corresponding infrastructure changes must be in place at the time of the second release. Videos no more than five minutes in length shall be developed to train users in both the Internet-based and app-based versions of COS.
-
+The most common result is that your git push would return the "deleted" commit to shared history. (First, you would git pull if you were working on the same branch, and then merge, but the results would be the same.) This means that whatever was so important to delete is now back in the repository. A password, token, or large binary file may return without ever alerting you.
